@@ -1,0 +1,1022 @@
+/* ==========================================================================
+   오늘의 운명 룰렛 - 스타일시트
+   테마: 모던 클린 & 프렌들리 (화이트/밝은 회색 베이스, 보라색 & 노란색 포인트)
+   ========================================================================== */
+
+/* --------------------------------------------------
+   1. CSS 변수 및 전역 리셋
+   -------------------------------------------------- */
+:root {
+  /* 주요 컬러 */
+  --primary: #6C5CE7;
+  --primary-hover: #5644D8;
+  --primary-light: #EDE9FE;
+  --primary-subtle: #F5F3FF;
+  --primary-border: #C4B5FD;
+
+  --secondary: #F59E0B;
+  --secondary-hover: #D97706;
+  --secondary-light: #FEF3C7;
+  --secondary-gold: #FCD34D;
+
+  /* 중립 컬러 (배경, 카드, 텍스트) */
+  --bg-main: #F8F9FC;
+  --card-bg: #FFFFFF;
+  --text-main: #1F2937;
+  --text-muted: #6B7280;
+  --text-light: #9CA3AF;
+  
+  --border-light: #E5E7EB;
+  --border-focus: #8B5CF6;
+
+  /* 상태 컬러 */
+  --danger: #EF4444;
+  --danger-hover: #DC2626;
+  --danger-light: #FEE2E2;
+  --success: #10B981;
+
+  /* 그림자 & 모서리 반경 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(108, 92, 231, 0.08);
+  --shadow-lg: 0 12px 28px rgba(108, 92, 231, 0.12);
+  --shadow-button: 0 4px 14px rgba(108, 92, 231, 0.3);
+
+  /* 전환 효과 */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 스크린 리더 전용 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --------------------------------------------------
+   2. 배경 은은한 포인트 장식 (과하지 않은 부드러운 형태)
+   -------------------------------------------------- */
+.bg-shape {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.bg-shape-1 {
+  top: -100px;
+  right: -80px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(108, 92, 231, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+.bg-shape-2 {
+  bottom: -60px;
+  left: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+/* --------------------------------------------------
+   3. 레이아웃 컨테이너
+   -------------------------------------------------- */
+.app-container {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* --------------------------------------------------
+   4. 상단 헤더
+   -------------------------------------------------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  margin-bottom: 6px;
+}
+
+.site-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-subtitle {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.sound-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.sound-toggle-btn:hover {
+  background: var(--primary-subtle);
+  color: var(--primary);
+  border-color: var(--primary-border);
+}
+
+.sound-toggle-btn.muted {
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------
+   5. 메인 레이아웃 (PC: 2단 배치, 모바일: 1단 스택)
+   -------------------------------------------------- */
+.main-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* 카드 공통 스타일 */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition-fast);
+}
+
+/* --------------------------------------------------
+   6. 왼쪽: 참가자 관리 영역
+   -------------------------------------------------- */
+.participant-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.title-with-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.count-badge {
+  background: var(--secondary-light);
+  color: var(--secondary-hover);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.danger-text {
+  color: var(--danger);
+}
+
+.danger-text:hover {
+  background: var(--danger-light);
+}
+
+/* 참가자 입력창 및 버튼 */
+.input-section {
+  margin-bottom: 16px;
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.text-input {
+  flex: 1;
+  padding: 11px 14px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  outline: none;
+  background: #FCFCFD;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+}
+
+.text-input:focus {
+  border-color: var(--primary);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+.text-input::placeholder {
+  color: var(--text-light);
+}
+
+.input-feedback {
+  font-size: 0.82rem;
+  margin-top: 6px;
+  min-height: 18px;
+  color: var(--danger);
+  font-weight: 500;
+  transition: opacity var(--transition-fast);
+}
+
+/* 참가자 목록 컨테이너 */
+.participant-list-container {
+  min-height: 180px;
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  background: #FAFAFC;
+  margin-bottom: 14px;
+}
+
+/* 커스텀 스크롤바 */
+.participant-list-container::-webkit-scrollbar {
+  width: 6px;
+}
+.participant-list-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.participant-list-container::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+
+.participant-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.participant-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #F0F1F5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  animation: fadeInSlide 0.2s ease-out;
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.participant-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.participant-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+.btn-delete-item {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  line-height: 1;
+  transition: all var(--transition-fast);
+}
+
+.btn-delete-item:hover {
+  color: var(--danger);
+  background: var(--danger-light);
+}
+
+/* 비어있는 상태 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 12px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 2rem;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}
+
+.empty-text {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.empty-subtext {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+.btn-sample-load {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px dashed var(--primary);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-sample-load:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+/* 최소 인원 알림 */
+.min-notice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  color: #B45309;
+  font-size: 0.82rem;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.notice-icon {
+  font-size: 0.95rem;
+}
+
+/* 히스토리 섹션 */
+.history-section {
+  border-top: 1px solid var(--border-light);
+  padding-top: 14px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.history-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.history-count {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  background: #F3F4F6;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+}
+
+.history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  background: #F9FAFB;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+}
+
+.history-winner {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.history-time {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+
+.history-empty {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* --------------------------------------------------
+   7. 오른쪽: 메인 룰렛 영역
+   -------------------------------------------------- */
+.roulette-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px 24px;
+}
+
+.roulette-status-bar {
+  margin-bottom: 12px;
+}
+
+.guide-text {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* 룰렛 외곽 및 캔버스 래퍼 */
+.roulette-outer-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px auto 20px;
+}
+
+/* 상단 고정 화살표 포인터 (12시 방향) */
+.roulette-pointer-wrapper {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.roulette-pointer {
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 34px solid #E11D48; /* 시인성 높은 선명한 레드-오렌지 화살표 */
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+  position: relative;
+}
+
+.roulette-pointer::after {
+  content: '';
+  position: absolute;
+  top: -34px;
+  left: -9px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 18px solid #FFD166;
+}
+
+/* 캔버스 */
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#rouletteCanvas {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: #FFFFFF;
+}
+
+/* 룰렛 정중앙 장식 핀 */
+.roulette-center-pin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #F59E0B 45%, #B45309 100%);
+  border: 4px solid #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pin-star {
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 추첨 버튼 */
+.spin-action-area {
+  width: 100%;
+  max-width: 380px;
+  margin-bottom: 20px;
+}
+
+.btn-spin {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-family: inherit;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, var(--primary) 0%, #7C3AED 100%);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-button);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: -0.01em;
+  transition: all var(--transition-fast);
+}
+
+.btn-spin:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+  background: linear-gradient(135deg, #5B4BC4 0%, #6D28D9 100%);
+}
+
+.btn-spin:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.3);
+}
+
+.btn-spin:disabled {
+  background: #E5E7EB;
+  color: #9CA3AF;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.spin-btn-icon {
+  font-size: 1.35rem;
+}
+
+/* --------------------------------------------------
+   8. 당첨 결과 카드
+   -------------------------------------------------- */
+.result-display-card {
+  width: 100%;
+  background: #F9FAFB;
+  border: 1.5px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px 16px;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+/* 대기 상태 */
+.result-idle-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.result-idle-icon {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+  opacity: 0.6;
+}
+
+.result-idle-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.result-idle-sub {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* 당첨 결과 활성 상태 */
+.result-active-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.result-prefix-tag {
+  display: inline-block;
+  background: var(--secondary-light);
+  color: #B45309;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+}
+
+.winner-name-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.winner-decor {
+  font-size: 1.8rem;
+  animation: bounceDecor 1s infinite alternate ease-in-out;
+}
+
+@keyframes bounceDecor {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+.winner-name {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(108, 92, 231, 0.15);
+}
+
+.winner-message {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 14px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.spin-again-btn {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.spin-again-btn:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------
+   9. 공통 버튼 스타일
+   -------------------------------------------------- */
+.btn {
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-outline {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: #F3F4F6;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #FFFFFF;
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+}
+
+/* --------------------------------------------------
+   10. 모달 대화상자 (확인창)
+   -------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modal-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.modal-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-buttons .btn {
+  flex: 1;
+}
+
+/* --------------------------------------------------
+   11. 색종이 (Confetti) 오버레이 Canvas
+   -------------------------------------------------- */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* --------------------------------------------------
+   12. 하단 푸터
+   -------------------------------------------------- */
+.site-footer {
+  margin-top: auto;
+  padding-top: 32px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+/* --------------------------------------------------
+   13. 반응형 미디어 쿼리 (태블릿 & 모바일 화면 대응)
+   -------------------------------------------------- */
+@media (max-width: 860px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-actions {
+    align-self: flex-end;
+  }
+
+  .roulette-outer-wrapper {
+    max-width: 360px;
+  }
+
+  .roulette-card {
+    order: -1; /* 모바일에서 룰렛이 먼저 눈에 띄게 할 수도 있으나 참가자 입력 후 바로 돌릴 수 있도록 고려 */
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 16px 12px 30px;
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+  }
+
+  .site-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .card {
+    padding: 18px 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .roulette-outer-wrapper {
+    max-width: 300px;
+  }
+
+  .winner-name {
+    font-size: 1.7rem;
+  }
+
+  .winner-decor {
+    font-size: 1.4rem;
+  }
+
+  .btn-spin {
+    font-size: 1.1rem;
+    padding: 14px 20px;
+  }
+}

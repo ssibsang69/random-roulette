@@ -1,0 +1,18 @@
+{
+  "name": "random-roulette",
+  "version": "1.0.0",
+  "description": "오늘의 운명 룰렛 - 친구들과 함께하는 공정하고 신나는 랜덤 룰렛 추첨 웹사이트",
+  "main": "index.html",
+  "scripts": {
+    "start": "node local-server.js",
+    "dev": "node local-server.js"
+  },
+  "keywords": [
+    "roulette",
+    "random",
+    "lucky-draw",
+    "gimal"
+  ],
+  "author": "ssibsang69",
+  "license": "MIT"
+}
